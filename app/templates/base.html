@@ -31,23 +31,37 @@
                     <a class="nav-link" href="/schedule">Schedule</a>
                 </li> -->
                 <li class="nav-item {%if request.path == '/parking'%}active{%endif%}"">
-                    <a class=" nav-link" href="/parking">My Account</a>
+                    <a class=" nav-link" href="{{url_for('index')}}">My Account</a>
                 </li>
                 <li class="nav-item {%if request.path == '/jets'%}active{%endif%}"">
                     <a class=" nav-link" href="/jets">Calendar</a>
                 </li>
-      
+
                 <li class="nav-item {%if request.path == '/logout'%}active{%endif%}"">
-                    <a class=" nav-link" href="/login">Sign In</a>
+                    <a class=" nav-link" href="{{url_for('login')}}">Sign In</a>
                 </li>
             </ul>
         </div>
     </nav>
 
     <div class="container-fluid">
+        {% with messages = get_flashed_messages()%}
+            {% if messages %}
+                <ul>
+
+                {%for message in messages%}
+                    <li>{{message}}</li>
+                {%endfor%}
+
+                </ul>
+            {% endif %}
+
+        {% endwith %}
+
         {% block content %}
         {% endblock %}
     </div>
 
 </body>
+
 </html>
